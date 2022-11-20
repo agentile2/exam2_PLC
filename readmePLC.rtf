@@ -1,0 +1,111 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2706
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 Test 2 - read me Alexandra Gentile\
+\
+A. Token code rules\
+\
+Token:		Regex:			Token Code:\
+start_stmnt	\'91start\'92				0\
+end_stmnt	\'91trats\'92				99\
+nd_file		\'91end\'92				-1\
+blk_lft		\'91\{\'91				95\
+blk_rt		\'91\}\'92				96\
+\
+			\
+Num		\'91\\nmbr\'92			7	\
+lowerCase	\'91[a-z]\'92				3\
+upperCase	\'91[A-z]\'92				10\
+\
+Loop_stint	\'91repeat\'92			12\
+Wthr_stmnt 	\'92whether\'92			13\
+\
+strg_typ	\'91String\'92			26\
+num_lit	\'91num\'92				27\
+num_typ	\'91[0-9]+\'92			50\
+bool_typ	Bool				1\
+idn_fr		[a-zA-z]+([\'91-][a-zA-Z]+)*?	44\
+\
+decl_re	\'91Declare\'92			55\
+ass_n		\'91=\'91				66	\
+\
+add_itn	\'91+\'92				31\
+sub_trct	\'91-\'91				32\
+mult_ply	\'91*\'92				33	\
+div_de		\'91/\'91				34\
+Mod_le	\'91%\'92				35\
+lss_thn	\'91<\'91				36\
+gr_thn		\'91>\'92				37	\
+lss_eqthn	\'91=<\'91				38\
+gr_eqthn	\'91>=\'91				39\
+eq_to		\'91==\'91				40\
+nt_eq		\'91!=\'91				41\
+\
+Lt_prnth	\'91(\'91				97	\
+rt_prnth	\'91)\'92				98\
+\
+\
+\
+Program \'97> start STATEMENTS trats\
+STATEMENTS \'97> ASSIGNM | CONDIT | LOOPS | MATH\
+CONDIT \'97> whether (RELATION) \{ STATEMENTS \} \
+RELATION \'97> TERM \{( < | > | =< | >= |\'92 = | != ) \
+TERM \'97> id | num_lit | STATEMENTS  \
+ASSIGN\'97> declare DATATYPE\
+DATATYPE \'97> \{( string | num | bool ) = TERM ;\
+STATEMENTS\
+DATA \'97> id | num_lit \
+LOOP \'97> repeat ( RELATION ) \{ STATEMENT \}\
+MATH \'97> EXPR \{( \'91*\'92 | \'91/\'91 | \'91%\'92) EXPR \}\
+EXPR\'97> FACTOR\{( \'91+\'92 | \'91-\'91 ) FACTOR\
+FACTOR\'97> EQUAL \{( \'91==\'91 | \'91!=\'91) EQUAL\
+EQUAL \'97> COMPARE \{( \'91<\'91 | \'91>\'92 )  COMPARE\
+COMPARE \'97> TERM\{( \'91<=\'91 | \'91>=\'91 ) TERM \},\
+ COMPARE \'97> SOLVE ( <= | >-= STATEMENTS \
+\
+Order of operations: \
+S \'97> add_itn | sub_trct\
+S \'97> sub_trct | mult_ply\
+S \'97> mult_ply | lt_prnth\
+S \'97> lt_prnth +(<statment> | rt_prnth\
+S \'97> rt_prnth | div_de\
+\
+\
+First(program) ->\{start\}\
+first(statements)  -> \{declare\} \}whether\}  \{repeat\} \{id\}\
+first(cond) \'97> \{whether\}\
+first(relation) \'97> \{id\}\
+first(term) -> \{identify\} \{num_literal|\} \{ ( \}\
+First(assign) \'97> \'91declare\'92\
+first(datatype) \'97> \{string\} \{num\} \{bool\}\
+first(data) \'97> \{identifier\} (num_literal\}\
+first(loop) \'97>  \{repeat\} \
+first(math) (identifier\} (num_literasl\} \{( \}\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 first(expr) (identifier\} (num_literasl\} \{( \}\
+first(expr) (identifier\} (num_literasl\} \{( \}\
+first(factor) (identifier\} (num_literasl\} \{( \}\
+first(eq_to) (identifier\} (num_literasl\} \{( \}\
+first(mrelate) (identifier\} (num_literasl\} \{( \}\
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+\cf0 This grammar passes the pairwise disjointness test and is NOT ambiguous as there\'92s no repeating cases throughout the language\
+\
+\
+\
+\
+\
+	\
+\
+\
+\
+\
+\
+\
+\
+\
+ }
